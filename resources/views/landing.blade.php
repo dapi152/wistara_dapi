@@ -30,8 +30,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Hero Background Slideshow */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .hero-bg img.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(2,20,10,0.55) 0%, rgba(5,40,20,0.65) 60%, rgba(2,15,8,0.80) 100%);
+            z-index: 1;
+        }
+        [data-aos] {
+            pointer-events: none;
+        }
+        [data-aos].aos-animate {
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -135,20 +168,31 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative pt-12 pb-24 overflow-hidden bg-gradient-to-b from-brand-50/50 via-white to-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-100 text-brand-800 text-xs font-bold tracking-wide uppercase mb-6">
+    <section class="relative min-h-[92vh] flex items-center overflow-hidden">
+        <!-- Background Image Slideshow -->
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?auto=format&fit=crop&w=1920&q=85" alt="Bali" class="active">
+            <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=1920&q=85" alt="Bromo">
+            <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=1920&q=85" alt="Labuan Bajo">
+            <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1920&q=85" alt="Yogyakarta">
+        </div>
+        <!-- Dark Gradient Overlay -->
+        <div class="hero-overlay"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 py-24 w-full">
+            <span data-aos="fade-down" data-aos-duration="800" class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-emerald-300 border border-emerald-400/30 text-xs font-bold tracking-wide uppercase mb-6">
                 ✨ Marketplace Pemandu Lokal Terverifikasi
             </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight">
-                Jelajahi Nusantara Bersama Warga Lokal, <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-500">100% Private & Fleksibel</span>
+            <h1 data-aos="fade-up" data-aos-duration="900" data-aos-delay="100" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight drop-shadow-lg">
+                Jelajahi Nusantara Bersama Warga Lokal,
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300">100% Private &amp; Fleksibel</span>
             </h1>
-            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal">
+            <p data-aos="fade-up" data-aos-duration="900" data-aos-delay="200" class="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto font-normal drop-shadow">
                 Temukan pemandu wisata terpercaya sesuai minat Anda — mulai dari tur kuliner jalanan legendaris, sejarah budaya, hingga eksplorasi alam tersembunyi.
             </p>
 
             <!-- SEARCH FILTER BOX -->
-            <div class="mt-10 max-w-4xl mx-auto bg-white p-4 rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-200">
+            <div data-aos="fade-up" data-aos-duration="900" data-aos-delay="300" class="mt-10 max-w-4xl mx-auto bg-white/95 backdrop-blur-md p-4 rounded-3xl shadow-2xl shadow-black/30 border border-white/50">
                 <form action="/" method="GET" class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
                     <!-- Pilih Kota -->
                     <div class="text-left px-4 py-2 bg-slate-50 rounded-2xl border border-slate-200/80">
@@ -185,13 +229,19 @@
                     </div>
                 </form>
             </div>
+
+            <!-- Scroll Indicator -->
+            <div data-aos="fade-up" data-aos-delay="600" class="mt-12 flex flex-col items-center space-y-2 text-white/50">
+                <span class="text-xs font-semibold tracking-widest uppercase">Scroll untuk Jelajahi</span>
+                <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
         </div>
     </section>
 
     <!-- SECTION KATEGORI WISATA -->
     <section id="kategori" class="py-16 bg-white border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-end justify-between mb-10">
+            <div data-aos="fade-up" data-aos-duration="700" class="flex items-end justify-between mb-10">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Kategori Pengalaman Unik</h2>
                     <p class="text-slate-500 mt-1">Pilih gaya liburan privat sesuai keinginan Anda.</p>
@@ -200,7 +250,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($kategoriList as $kategori)
-                    <div class="p-6 rounded-2xl border border-slate-200 hover:border-brand-500 hover:shadow-lg transition group bg-slate-50 hover:bg-white">
+                    <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ $loop->index * 100 }}" class="p-6 rounded-2xl border border-slate-200 hover:border-brand-500 hover:shadow-lg transition group bg-slate-50 hover:bg-white">
                         <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
                             🧭
                         </div>
@@ -216,14 +266,14 @@
     <!-- SECTION DESTINASI KOTA POPULER -->
     <section id="destinasi" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-10 text-center sm:text-left">
+            <div data-aos="fade-up" data-aos-duration="700" class="mb-10 text-center sm:text-left">
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Kota Destinasi Pilihan</h2>
                 <p class="text-slate-500 mt-1">Jelajahi sudut terbaik Indonesia bersama warga lokal di kota ini.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($kotaList as $kota)
-                    <div class="relative group rounded-3xl overflow-hidden shadow-md aspect-[4/5] bg-slate-800">
+                    <div data-aos="zoom-in" data-aos-duration="600" data-aos-delay="{{ $loop->index * 100 }}" class="relative group rounded-3xl overflow-hidden shadow-md aspect-[4/5] bg-slate-800">
                         <img src="{{ $kota->foto_kota ?? 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80' }}" 
                              alt="{{ $kota->nama_kota }}" 
                              class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-90">
@@ -246,7 +296,7 @@
     <!-- SECTION PEMANDU WISATA TERVERIFIKASI -->
     <section id="pemandu" class="py-16 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12">
+            <div data-aos="fade-up" data-aos-duration="700" class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Terpercaya & Berpengalaman</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Pemandu Lokal Wisatara</h2>
@@ -256,7 +306,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($pemanduList as $pemandu)
-                    <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
+                    <div data-aos="fade-up" data-aos-duration="700" data-aos-delay="{{ $loop->index * 100 }}" class="bg-slate-50 rounded-3xl p-6 border border-slate-200 hover:shadow-xl transition flex flex-col justify-between">
                         <div>
                             <div class="flex items-center space-x-4 mb-5">
                                 <img src="{{ $pemandu->foto_profil ?? 'https://ui-avatars.com/api/?name='.urlencode($pemandu->nama_pemandu) }}" 
@@ -314,7 +364,7 @@
     <!-- SECTION PAKET TUR PRIVAT (EXPERIENCES) -->
     <section id="paket" class="py-16 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
+            <div data-aos="fade-up" data-aos-duration="700" class="mb-12">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Eksklusif & Autentik</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Paket Tur Privat Populer</h2>
                 <p class="text-slate-500 mt-1">Hanya rombongan Anda sendiri. Rute perjalanan dapat disesuaikan!</p>
@@ -322,7 +372,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($paketList as $paket)
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-200 flex flex-col justify-between">
+                    <div data-aos="fade-up" data-aos-duration="700" data-aos-delay="{{ $loop->index * 100 }}" class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition border border-slate-200 flex flex-col justify-between">
                         <div>
                             <div class="relative h-56 bg-slate-200">
                                 <img src="{{ $paket->foto_sampul ?? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80' }}" 
@@ -392,14 +442,14 @@
     <!-- SECTION KEUNGGULAN (VALUE PROPOSITION) -->
     <section id="keunggulan" class="py-20 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
+            <div data-aos="fade-up" data-aos-duration="700" class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs font-bold tracking-widest text-emerald-400 uppercase">Standar Kualitas Wisatara</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">Mengapa Berlibur Lewat Wisatara?</h2>
                 <p class="text-slate-400 mt-4 leading-relaxed">Kami mengubah cara Anda menikmati Indonesia menjadi lebih bermakna, personal, dan tanpa kerumitan rombongan besar.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
+                <div data-aos="fade-up" data-aos-duration="700" data-aos-delay="0" class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
                     <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6">
                         🔒
                     </div>
@@ -409,7 +459,7 @@
                     </p>
                 </div>
 
-                <div class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
+                <div data-aos="fade-up" data-aos-duration="700" data-aos-delay="150" class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
                     <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6">
                         ✏️
                     </div>
@@ -419,7 +469,7 @@
                     </p>
                 </div>
 
-                <div class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
+                <div data-aos="fade-up" data-aos-duration="700" data-aos-delay="300" class="bg-slate-800/60 p-8 rounded-3xl border border-slate-700/60">
                     <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6">
                         🛡️
                     </div>
@@ -445,5 +495,25 @@
         </div>
     </footer>
 
+<!-- AOS Init Script -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        offset: 60,
+        easing: 'ease-out-cubic',
+    });
+
+    // Hero Background Slideshow
+    const heroImgs = document.querySelectorAll('.hero-bg img');
+    let currentImg = 0;
+    if (heroImgs.length > 1) {
+        setInterval(() => {
+            heroImgs[currentImg].classList.remove('active');
+            currentImg = (currentImg + 1) % heroImgs.length;
+            heroImgs[currentImg].classList.add('active');
+        }, 5000);
+    }
+</script>
 </body>
 </html>
